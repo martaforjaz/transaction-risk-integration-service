@@ -9,13 +9,13 @@
 <rect x="687" y="121" width="223" height="44" rx="9"/>
 </g>
 <g font-size="17" text-anchor="middle">
-<text x="123" y="119">Gateway</text><text x="123" y="178">Ledger</text><text x="344" y="149">Normalize</text>
-<text x="560" y="149">Persist by UUID</text><text x="799" y="149">Evaluate risk</text>
+<text x="123" y="119">Gateway</text><text x="123" y="178">Ledger</text><text x="344" y="149">PostgreSQL outbox</text>
+<text x="560" y="149">Kafka consumer</text><text x="799" y="149">HTTP risk evaluation</text>
 </g>
 <g stroke="#9bc6d1" fill="none" stroke-width="2">
 <path d="M207 113l47 28m-47 31 47-28m178 0h42m171 0h41"/>
 <path d="M800 167v50H560v-50" stroke="#ffca7c" stroke-dasharray="5 4"/>
 </g>
-<text x="686" y="244" font-size="16" text-anchor="middle" fill="#ffca7c">Retry after a failed evaluation</text>
+<text x="686" y="244" font-size="16" text-anchor="middle" fill="#ffca7c">Delayed retries · risk.failed after exhaustion</text>
 </g></svg>
 

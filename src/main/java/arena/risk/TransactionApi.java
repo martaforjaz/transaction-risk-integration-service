@@ -38,14 +38,16 @@ class TransactionApi {
 
     @PostMapping("/{id}/retry")
     ResponseEntity<Transactions.State> retry(@PathVariable UUID id) {
-        return response(transactions.process(id));
+        return response(transactions.asynchronous() ? transactions.scheduleRetry(id) : transactions.process(id));
     }
 
     private ResponseEntity<Transactions.State> submit(UUID id, long amount, String currency) {
         if (id == null || amount <= 0 || !("EUR".equals(currency) || "USD".equals(currency))) {
             throw new ResponseStatusException(BAD_REQUEST, "Expected a UUID, a positive amount and EUR or USD");
         }
-        if (transactions.insert(id, amount, currency)) return response(transactions.process(id));
+        if (transactions.insert(id, amount, currency)) {
+            return response(transactions.asynchronous() ? transactions.get(id) : transactions.process(id));
+        }
         var existing = transactions.get(id);
         if (existing.amountMinor() != amount || !existing.currency().equals(currency)) {
             throw new ResponseStatusException(CONFLICT, "Reference already used for a different transaction");

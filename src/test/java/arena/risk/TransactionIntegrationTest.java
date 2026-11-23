@@ -20,7 +20,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = "risk.async=false")
 class TransactionIntegrationTest {
     private static final PostgreSQLContainer<?> DB = new PostgreSQLContainer<>("postgres:17-alpine");
     private static final AtomicBoolean OFFLINE = new AtomicBoolean();
