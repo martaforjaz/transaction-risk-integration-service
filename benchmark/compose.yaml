@@ -1,0 +1,20 @@
+services:
+  app:
+    image: transaction-risk-benchmark:local
+    environment:
+      SPRING_KAFKA_LISTENER_AUTO_STARTUP: "false"
+    ports: !override
+      - "127.0.0.1:18080:8080"
+  worker:
+    image: transaction-risk-benchmark:local
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/risk
+      RISK_URL: http://risk:8090/evaluate
+      KAFKA_BOOTSTRAP: kafka:9092
+    depends_on:
+      kafka:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+      risk:
+        condition: service_started

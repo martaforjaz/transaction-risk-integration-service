@@ -77,3 +77,34 @@ The integration suite starts PostgreSQL and Kafka with Testcontainers and exerci
 
 The service guarantees one committed decision per transaction UUID. An interruption after the remote request but before the database commit can cause a subsequent request to contact the risk service again. The API forwards the transaction UUID as an idempotency key. The synthetic risk service returns a deterministic decision and has no side effects.
 
+
+## Load and consumer recovery
+
+![Backlog growth and drain during a consumer restart](benchmark/worker-recovery.png)
+
+A local Docker Compose benchmark runs ingress and the Kafka consumer in separate containers, with a synthetic risk endpoint. The API stays up while the consumer is stopped. Each run uses fresh transaction IDs. After decisions are observed, the driver resubmits 20% of the IDs and checks in PostgreSQL that each unique transaction is decided with exactly one evaluation attempt.
+
+| Scenario | Target submissions/s | Unique decisions | Observed p95 (s) | End-to-end decisions/s |
+| --- | ---: | ---: | ---: | ---: |
+| Normal | 10 | 60 | 0.982 | 9.77 |
+| Normal | 30 | 120 | 0.999 | 26.40 |
+| Worker stopped, then restarted | 25 | 125 | 12.158 | 10.09 |
+
+All **305 unique transactions** completed across the three measured scenarios. **61 repeated submissions** preserved the existing decisions. In the outage scenario, all **125 requests** were accepted while the worker was stopped. The last decision was observed **6.407 seconds from the restart request**, including container startup, consumer rejoin and the delay until the next database sample.
+
+The script polls PostgreSQL. Latency runs from the client receiving HTTP acceptance to the first sample that observes a decision. Throughput divides completed transactions by elapsed time from the first send to the final observed decision. The recovery scenario includes the worker downtime in throughput and latency. These are measurements from one local run with a mock risk endpoint. [Raw measurements](benchmark/results.json).
+
+If unfinished transactions rise, compare Kafka consumer lag with outbox depth. Rising consumer lag with a draining outbox points to work waiting at the consumer. Check consumer availability and rebalance logs, then check the upstream risk endpoint's response latency and errors if the consumer is active.
+
+### Reproduce
+
+Requires Docker Compose with support for the `!override` tag and Python 3.11+. The stack uses port 18080 and a separate Compose project.
+
+```sh
+docker compose -p risk-benchmark -f compose.yaml -f benchmark/compose.yaml up -d --build
+# Wait for the application and worker to start.
+python benchmark/load.py
+python -m pip install matplotlib
+python benchmark/plot.py
+docker compose -p risk-benchmark -f compose.yaml -f benchmark/compose.yaml stop
+```

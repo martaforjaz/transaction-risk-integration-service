@@ -1,0 +1,250 @@
+{
+  "baseline_10": {
+    "target_rps": 10,
+    "transactions": 60,
+    "duplicate_submissions": 12,
+    "decisions": 60,
+    "attempts_per_transaction": 1,
+    "peak_unfinished": 3,
+    "observed_p50_seconds": 0.539,
+    "observed_p95_seconds": 0.982,
+    "end_to_end_decisions_per_second": 9.77,
+    "recovery_seconds": null,
+    "timeline": [
+      {
+        "s": 0.453,
+        "received": 5,
+        "decided": 2,
+        "pending": 3
+      },
+      {
+        "s": 1.234,
+        "received": 12,
+        "decided": 11,
+        "pending": 1
+      },
+      {
+        "s": 2.047,
+        "received": 21,
+        "decided": 20,
+        "pending": 1
+      },
+      {
+        "s": 2.859,
+        "received": 29,
+        "decided": 27,
+        "pending": 2
+      },
+      {
+        "s": 3.687,
+        "received": 37,
+        "decided": 36,
+        "pending": 1
+      },
+      {
+        "s": 4.515,
+        "received": 46,
+        "decided": 45,
+        "pending": 1
+      },
+      {
+        "s": 5.328,
+        "received": 54,
+        "decided": 51,
+        "pending": 3
+      },
+      {
+        "s": 6.14,
+        "received": 60,
+        "decided": 60,
+        "pending": 0
+      },
+      {
+        "s": 6.922,
+        "received": 60,
+        "decided": 60,
+        "pending": 0
+      }
+    ]
+  },
+  "baseline_30": {
+    "target_rps": 30,
+    "transactions": 120,
+    "duplicate_submissions": 24,
+    "decisions": 120,
+    "attempts_per_transaction": 1,
+    "peak_unfinished": 8,
+    "observed_p50_seconds": 0.594,
+    "observed_p95_seconds": 0.999,
+    "end_to_end_decisions_per_second": 26.4,
+    "recovery_seconds": null,
+    "timeline": [
+      {
+        "s": 0.453,
+        "received": 13,
+        "decided": 9,
+        "pending": 4
+      },
+      {
+        "s": 1.281,
+        "received": 38,
+        "decided": 30,
+        "pending": 8
+      },
+      {
+        "s": 2.093,
+        "received": 63,
+        "decided": 57,
+        "pending": 6
+      },
+      {
+        "s": 2.921,
+        "received": 87,
+        "decided": 86,
+        "pending": 1
+      },
+      {
+        "s": 3.765,
+        "received": 113,
+        "decided": 105,
+        "pending": 8
+      },
+      {
+        "s": 4.546,
+        "received": 120,
+        "decided": 120,
+        "pending": 0
+      },
+      {
+        "s": 5.375,
+        "received": 120,
+        "decided": 120,
+        "pending": 0
+      }
+    ]
+  },
+  "worker_outage": {
+    "target_rps": 25,
+    "transactions": 125,
+    "duplicate_submissions": 25,
+    "decisions": 125,
+    "attempts_per_transaction": 1,
+    "peak_unfinished": 125,
+    "observed_p50_seconds": 9.891,
+    "observed_p95_seconds": 12.158,
+    "end_to_end_decisions_per_second": 10.09,
+    "recovery_seconds": 6.407,
+    "timeline": [
+      {
+        "s": 0.5,
+        "received": 0,
+        "decided": 0,
+        "pending": 0
+      },
+      {
+        "s": 1.328,
+        "received": 0,
+        "decided": 0,
+        "pending": 0
+      },
+      {
+        "s": 2.109,
+        "received": 20,
+        "decided": 0,
+        "pending": 20
+      },
+      {
+        "s": 2.906,
+        "received": 40,
+        "decided": 0,
+        "pending": 40
+      },
+      {
+        "s": 3.734,
+        "received": 61,
+        "decided": 0,
+        "pending": 61
+      },
+      {
+        "s": 4.562,
+        "received": 81,
+        "decided": 0,
+        "pending": 81
+      },
+      {
+        "s": 5.39,
+        "received": 101,
+        "decided": 0,
+        "pending": 101
+      },
+      {
+        "s": 6.203,
+        "received": 122,
+        "decided": 0,
+        "pending": 122
+      },
+      {
+        "s": 6.984,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 7.781,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 8.64,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 9.5,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 10.343,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 11.156,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 12.0,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 12.828,
+        "received": 125,
+        "decided": 0,
+        "pending": 125
+      },
+      {
+        "s": 13.703,
+        "received": 125,
+        "decided": 125,
+        "pending": 0
+      },
+      {
+        "s": 14.531,
+        "received": 125,
+        "decided": 125,
+        "pending": 0
+      }
+    ],
+    "worker_stopped_s": 1.312,
+    "worker_start_requested_s": 7.296
+  }
+}
